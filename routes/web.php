@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\OrderStatusUpdate;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* For testing pusher */
+class Order
+{
+    public $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+}
+
 Route::get('/', function () {
+    OrderStatusUpdate::dispatch(new Order(1));
+
     return view('welcome');
 });
 
